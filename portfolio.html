@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--
+    교체 방법
+    - 이름/소개/역할: 아래 <section id="hero"> 안의 텍스트 수정
+    - 기술 스택: script 안의 SKILLS 배열 수정
+    - 프로젝트: script 안의 PROJECTS 배열 수정
+    - 연락처: 아래 <section id="contact"> 안의 링크 수정
+    - 색상: 아래 tailwind.config의 brand(스틸 블루), wood(따뜻한 나무색) 값 수정
+  -->
+  <title>홍상표 - 포트폴리오</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            // 스크린샷 기반: 스틸 블루(셔츠/모니터 빛), 따뜻한 나무색(책상), 차콜(모니터 화면)
+            brand: { 50: '#f1f5f9', 500: '#5b7a99', 600: '#47647f', 700: '#384f66' },
+            wood: { 400: '#c49a6c', 500: '#a57a52' },
+            ink: { 800: '#2a2f36', 900: '#1f2328' }
+          },
+          boxShadow: {
+            card: '0 12px 32px -12px rgba(31, 35, 40, 0.25)',
+            glow: '0 10px 24px -8px rgba(71, 100, 127, 0.55)'
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    html { scroll-padding-top: 4rem; }
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.is-visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body class="bg-stone-100 text-ink-900 antialiased dark:bg-ink-900 dark:text-slate-100 font-sans">
+
+  <!-- 상단 네비게이션 -->
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-stone-200/80 bg-stone-100/85 shadow-sm backdrop-blur dark:border-ink-800 dark:bg-ink-900/85">
+    <nav class="flex items-center justify-between px-4 py-3 sm:px-8 lg:px-12">
+      <a href="#hero" class="text-xl font-bold text-brand-600 sm:text-2xl dark:text-brand-500">홍상표</a>
+      <div class="flex items-center gap-3 text-base font-medium sm:gap-5">
+        <a href="#hero" class="hover:text-wood-500">소개</a>
+        <a href="#skills" class="hover:text-wood-500">기술</a>
+        <a href="#projects" class="hover:text-wood-500">프로젝트</a>
+        <a href="#contact" class="hover:text-wood-500">연락처</a>
+        <button id="theme-toggle" type="button" aria-label="다크모드 전환"
+          class="rounded-full border border-stone-300 bg-white px-3 py-1 shadow-sm hover:border-brand-500 dark:border-ink-800 dark:bg-ink-800">
+          🌙
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="mx-auto max-w-5xl px-4 pt-24">
+
+    <!-- Hero: 왼쪽 소개, 오른쪽 모니터 카드 -->
+    <section id="hero" class="reveal grid items-center gap-10 rounded-3xl bg-white px-6 py-14 shadow-card dark:bg-ink-800 md:grid-cols-2 md:px-12">
+      <div class="text-center md:text-left">
+        <p class="mb-3 inline-block rounded-full bg-brand-50 px-3 py-1 text-sm font-semibold text-brand-600 dark:bg-ink-900 dark:text-brand-500">
+          프론트엔드 개발자
+        </p>
+        <h1 class="mb-4 text-4xl font-extrabold tracking-tight md:text-5xl">홍상표</h1>
+        <p class="text-base leading-relaxed text-slate-600 dark:text-slate-300">
+          사용자가 편하게 쓸 수 있는 웹을 만드는 것을 좋아합니다.
+          작은 프로젝트로 새로운 기술을 직접 실험하며 배우고 있어요.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
+          <a href="#projects" class="rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-glow hover:bg-brand-700">프로젝트 보기</a>
+          <a href="#contact" class="rounded-lg border border-stone-300 px-5 py-2.5 text-sm font-semibold hover:border-wood-500 dark:border-ink-900">연락하기</a>
+        </div>
+      </div>
+
+      <!-- 모니터 카드 (차콜 화면 + 나무색 받침) -->
+      <div class="mx-auto w-full max-w-sm">
+        <div class="rounded-2xl bg-ink-900 p-4 shadow-card ring-1 ring-ink-800">
+          <div class="mb-3 flex items-center gap-1.5">
+            <span class="h-2.5 w-2.5 rounded-full bg-red-400/80"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-yellow-400/80"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-green-400/80"></span>
+          </div>
+          <div class="space-y-2.5 rounded-lg bg-ink-800 p-4">
+            <div class="h-2.5 w-3/4 rounded bg-brand-500/70"></div>
+            <div class="h-2.5 w-1/2 rounded bg-slate-500/60"></div>
+            <div class="h-2.5 w-5/6 rounded bg-slate-500/40"></div>
+            <div class="h-2.5 w-2/3 rounded bg-wood-400/70"></div>
+            <div class="h-2.5 w-4/5 rounded bg-slate-500/40"></div>
+          </div>
+        </div>
+        <div class="mx-auto h-3 w-1/3 rounded-b-xl bg-gradient-to-b from-wood-400 to-wood-500 shadow-md"></div>
+      </div>
+    </section>
+
+    <!-- 기술 스택 -->
+    <section id="skills" class="reveal py-12">
+      <h2 class="mb-6 text-2xl font-bold">기술 스택</h2>
+      <ul id="skills-list" class="flex flex-wrap gap-2"></ul>
+    </section>
+
+    <!-- 프로젝트 -->
+    <section id="projects" class="reveal py-12">
+      <h2 class="mb-6 text-2xl font-bold">프로젝트</h2>
+      <div id="projects-grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </section>
+
+    <!-- 연락처 -->
+    <section id="contact" class="reveal py-12">
+      <h2 class="mb-6 text-2xl font-bold">연락처</h2>
+      <div class="flex flex-wrap gap-6">
+        <a href="mailto:example@example.com"
+          class="rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-glow hover:bg-brand-700">
+          이메일 보내기
+        </a>
+        <a href="https://github.com/example" target="_blank" rel="noopener noreferrer"
+          class="rounded-lg border border-stone-300 bg-white px-5 py-2.5 text-sm font-semibold shadow-sm hover:border-wood-500 dark:border-ink-800 dark:bg-ink-800">
+          GitHub
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="mt-20 border-t border-stone-200 py-14 text-center text-sm text-slate-500 dark:border-ink-800">
+    &copy; 2026 홍상표
+  </footer>
+
+  <script>
+    // ===== 데이터 (여기만 수정하면 됩니다) =====
+    const SKILLS = ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS', 'Git'];
+
+    const PROJECTS = [
+      {
+        title: '개인 포트폴리오',
+        description: '반응형 레이아웃과 다크모드를 적용한 자기소개 사이트입니다.',
+        tags: ['HTML', 'Tailwind CSS'],
+        link: '#'
+      },
+      {
+        title: '할 일 관리 앱',
+        description: '로컬 저장소를 활용해 할 일을 추가, 완료, 삭제하는 간단한 앱입니다.',
+        tags: ['JavaScript', 'CSS'],
+        link: '#'
+      },
+      {
+        title: '날씨 대시보드',
+        description: '도시별 날씨 정보를 카드 형태로 보여주는 화면입니다.',
+        tags: ['JavaScript', 'API'],
+        link: '#'
+      }
+    ];
+
+    // ===== 렌더링 =====
+    const chipClass = 'rounded-full bg-white px-3 py-1 text-sm font-medium shadow-sm ring-1 ring-stone-200 dark:bg-ink-800 dark:ring-ink-900';
+
+    document.getElementById('skills-list').innerHTML = SKILLS
+      .map(skill => `<li class="${chipClass}">${skill}</li>`)
+      .join('');
+
+    document.getElementById('projects-grid').innerHTML = PROJECTS
+      .map(p => `
+        <article class="flex flex-col rounded-2xl bg-white p-6 shadow-card ring-1 ring-stone-200 transition duration-300 hover:-translate-y-2 hover:shadow-xl hover:ring-2 hover:ring-brand-500 dark:bg-ink-800 dark:ring-ink-900 dark:hover:ring-brand-500">
+          <h3 class="mb-2 text-lg font-bold">${p.title}</h3>
+          <p class="mb-4 flex-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">${p.description}</p>
+          <div class="mb-4 flex flex-wrap gap-1.5">
+            ${p.tags.map(t => `<span class="rounded bg-brand-50 px-2 py-0.5 text-xs font-medium text-brand-600 dark:bg-ink-900 dark:text-brand-500">${t}</span>`).join('')}
+          </div>
+          <a href="${p.link}" class="text-sm font-semibold text-wood-500 hover:underline dark:text-wood-400">자세히 보기 →</a>
+        </article>`)
+      .join('');
+
+    // ===== 다크모드 =====
+    const root = document.documentElement;
+    const toggle = document.getElementById('theme-toggle');
+
+    function applyTheme(dark) {
+      root.classList.toggle('dark', dark);
+      toggle.textContent = dark ? '☀️' : '🌙';
+    }
+
+    let saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (e) { /* 저장소 사용 불가 시 무시 */ }
+    applyTheme(saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    toggle.addEventListener('click', () => {
+      const dark = !root.classList.contains('dark');
+      applyTheme(dark);
+      try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) { /* 무시 */ }
+    });
+
+    // ===== 섹션 페이드인 =====
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
